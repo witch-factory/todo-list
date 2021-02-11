@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import TodoItem from './TodoItem.js';
 
 class TodoItemList extends React.Component{
+    shouldComponentUpdate (nextProps, nextState, nextContext) {
+        return this.props.todos!=nextProps.todos;
+    }
+
     render(){
         const {todos, onToggle, onRemove}=this.props;
 

@@ -3,6 +3,10 @@ import './TodoItem.css'
 import TodoItemList from "./TodoItemList";
 
 class TodoItem extends React.Component{
+    shouldComponentUpdate (nextProps, nextState, nextContext) {
+        return this.props.checked!=nextProps.checked;
+    }
+
     render(){
         const{text, checked, id, onToggle, onRemove}=this.props;
 
