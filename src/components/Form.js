@@ -3,10 +3,12 @@ import './Form.css';
 
 class Form extends React.Component{
     render(){
+        const {value, onChange, onKeyPress, onCreate}=this.props;
+
         return(
             <div className="form">
-                <input value={this.props.value} onChange={this.props.onChange} onKeyPress={this.props.onKeyPress} />
-                <div className="create-button" onClick={this.props.onCreate}>
+                <input value={value} onChange={onChange} onKeyPress={onKeyPress} />
+                <div className="create-button" onClick={onCreate}>
                     추가
                 </div>
             </div>
