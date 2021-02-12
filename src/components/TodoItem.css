@@ -28,7 +28,7 @@
 
 .checked{
     text-decoration:line-through;
-    color:#adb5db;
+    color:#adb5db !important;
 }
 
 .check-mark{
