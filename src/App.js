@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TodoListTemplate from "./components/TodoListTemplate";
 import Form from './components/Form.js';
 import TodoItemList from './components/TodoItemList.js';
+import Palette from "./components/Palette";
 
 class App extends Component{
     id=3;
@@ -11,7 +12,8 @@ class App extends Component{
             {id:0,text: '체크리스트 1',checked:false},
             {id:1,text: '체크리스트 2',checked:true},
             {id:2,text: '체크리스트 3',checked:false},
-        ]
+        ],
+        color:'#343a40'
     }
 
     handleChange=(e)=>{
@@ -21,13 +23,14 @@ class App extends Component{
     }
 
     handleCreate=()=>{
-        const {input, todos}=this.state;
+        const {input, todos, color}=this.state;
         this.setState({
             input:'',
             todos:todos.concat({
                 id:this.id++,
                 text:input,
-                checked:false
+                checked:false,
+                color:color
             })
         })
     }
@@ -61,9 +64,13 @@ class App extends Component{
         });
     }
 
+    handleSelectColor=(color)=>{
+        this.setState({color})
+    }
+
   render(){
-        const {input, todos}=this.state;
-        const{handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove}=this;
+        const {input, todos, color}=this.state;
+        const{handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove, handleSelectColor}=this;
 
         return (
             <TodoListTemplate form={
@@ -72,8 +79,13 @@ class App extends Component{
                     onKeyPress={handleKeyPress}
                     onChange={handleChange}
                     onCreate={handleCreate}
+                    color={color}
                 />
-            }>
+            }
+            palette={
+                <Palette colors={['#343a40', '#f03e3e', '#12b886', '#228ae6']} selected={color} onSelect={handleSelectColor} />
+            }
+            >
                 <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
             </TodoListTemplate>
         )
